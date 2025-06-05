@@ -1,0 +1,31 @@
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    senha VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE categoria (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL
+);
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+CREATE TABLE contato (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    facebook VARCHAR(255),
+    x VARCHAR(255),
+    instagram VARCHAR(255),
+    linkedin VARCHAR(255),
+    github VARCHAR(255)
+);
+
+CREATE TABLE receita (
+    id SERIAL PRIMARY KEY,
+    nomereceita VARCHAR(150) NOT NULL,
+    categoria VARCHAR(100),
+    ingredientes TEXT,
+    modopreparo TEXT
+);
+

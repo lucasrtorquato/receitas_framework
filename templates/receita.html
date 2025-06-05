@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}
+Receita
+{% endblock %}
+
+{% block content %}
+
+<form id="form-receita" method="POST">
+    <h2>Receita</h2>
+    <hr>
+    <div class="btn-group" role="group" aria-label="Exemplo básico">
+        <button type="button" class="btn btn-outline-secondary btn-sm"
+            onclick="window.location.href='{{ url_for('receita') }}'"><i
+                class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancelar</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm"
+            onclick="document.getElementById('form-receita').reset();"><i
+                class="fa-solid fa-utensils"></i>&nbsp;&nbsp;Nova Receita</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm"
+            onclick="window.location.href='{{ url_for('listreceita') }}'"><i
+                class="fa-solid fa-list"></i>&nbsp;&nbsp;Listar Receitas</button>
+    </div>
+    <p></p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="nome-receita">Nome da Receita</label>
+            <input type="text" class="form-control" id="nome-receita" name="nome-receita"
+                value="{{ receita.nome_receita if receita else '' }}" placeholder="Nome da Receita">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria" class="form-control">
+                <option value="" disabled {% if not receita %}selected{% endif %}>Escolher...</option>
+                {% for categoria in categorias %}
+                <option value="{{ categoria.nome_categoria }}" {% if receita and
+                    receita.categoria==categoria.nome_categoria %}selected{% endif %}>
+                    {{ categoria.nome_categoria }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group col-md-12">
+            <label for="ingredientes">Ingredientes</label>
+            <textarea class="form-control" id="ingredientes" name="ingredientes" rows="7"
+                placeholder="Digite os Ingredientes">{{ receita.ingredientes if receita else '' }}</textarea>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="preparo">Modo de Preparo</label>
+            <textarea class="form-control" id="modo_preparo" name="modo_preparo" rows="7"
+                placeholder="Digite os Modo de Preparo">{{ receita.modo_preparo if receita else '' }}</textarea>
+        </div>
+    </div>
+
+    <hr>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i>&nbsp;Gravar Receita</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ url_for('receita') }}'"><i
+            class="fa-solid fa-xmark"></i>&nbsp;Cancelar</button>
+</form>
+<br>
+{% endblock %}

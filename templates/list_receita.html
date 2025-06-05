@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+Listar Receitas
+{% endblock %}
+
+{% block content %}
+<h2>Receitas Cadastradas</h2>
+<hr>
+
+<div class="btn-group mb-3" role="group">
+    <button type="button" class="btn btn-outline-secondary btn-sm"
+        onclick="window.location.href='{{ url_for('receita') }}'">
+        <i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;Nova Receita
+    </button>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Nome</th>
+            <th>Categoria</th>
+            <th style="width: 160px;">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for receita in receitas %}
+        <tr>
+            <td>{{ receita.nome_receita }}</td>
+            <td>{{ receita.categoria }}</td>
+            <td>
+                <div class="btn-group btn-group-sm" role="group">
+                    <a href="{{ url_for('editar_receita', id=receita.id) }}" class="btn btn-warning">
+                        <i class="fa-solid fa-pen-to-square"></i> Editar
+                    </a>
+                    <a href="{{ url_for('excluir_receita', id=receita.id) }}" class="btn btn-danger"
+                        onclick="return confirm('Tem certeza que deseja excluir esta receita?');">
+                        <i class="fa-solid fa-trash"></i> Excluir
+                    </a>
+                </div>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4" class="text-center">Nenhum categoria encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

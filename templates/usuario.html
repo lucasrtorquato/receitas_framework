@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Usuário
+{% endblock %}
+
+{% block content %}
+
+<form id="form-usuario" method="POST">
+    <h2>Usuário</h2>
+    <hr>
+    <div class="btn-group" role="group" aria-label="Exemplo básico">
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.location.href='{{ url_for('usuario') }}'"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancelar</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('form-usuario').reset();"><i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;Novo Usuário</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.location.href='{{ url_for('listusuario') }}'"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Listar Usuários</button>
+    </div>
+    <p></p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="nome">Nome Completo</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="{{ usuario.nome if usuario else '' }}" placeholder="Nome Completo">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email"  name="email" value="{{ usuario.email if usuario else '' }}" placeholder="Email">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="senha">Senha</label>
+            <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="conf-senha">Confirmar Senha</label>
+            <input type="password" class="form-control" id="conf-senha" name="conf-senha" placeholder="Confirmar Senha">
+        </div>
+    </div>
+    <div class="form-group">
+      <label for="situacao">Situação</label>
+      <select class="form-control" id="situacao" name="situacao">
+        <option value="ativo" {% if usuario and usuario.situacao == 'ativo' %}selected{% endif %}>Ativo</option>
+        <option value="inativo" {% if usuario and usuario.situacao == 'inativo' %}selected{% endif %}>Inativo</option>
+      </select>
+    </div>
+    <br>
+    <hr>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i>&nbsp;Gravar Usuário</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ url_for('usuario') }}'"><i class="fa-solid fa-xmark"></i>&nbsp;Cancelar</button>
+</form>
+<br>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Contatos
+{% endblock %}
+
+{% block content %}
+
+<form id="form-contato" method="POST">
+    <h2>Minhas Redes</h2>
+    <hr>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="facebook">Facebook</label>
+            <input type="text" class="form-control" id="facebook" name="facebook" value="{{ contato.facebook if contato else '' }}" placeholder="Link do Facebook">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="twx">X</label>
+            <input type="text" class="form-control" id="rede_x" name="rede_x" value="{{ contato.rede_x if contato else '' }}" placeholder="Link do X">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="instagram">Instagram</label>
+            <input type="text" class="form-control" id="instagram" name="instagram" value="{{ contato.instagram if contato else '' }}" placeholder="Link do Instagram">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="linkedin">Linkedin</label>
+            <input type="text" class="form-control" id="linkedin" name="linkedin" value="{{ contato.linkedin if contato else '' }}" placeholder="Link do Linkedin">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="github">GitHub</label>
+            <input type="text" class="form-control" id="github" name="github" value="{{ contato.github if contato else '' }}" placeholder="Link do GitHub">
+        </div>
+    </div>
+
+    <hr>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i>&nbsp;Gravar Contatos</button>
+    <button type="button" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i>&nbsp;Cancelar</button>
+  </form>
+  <br>
+{% endblock %}

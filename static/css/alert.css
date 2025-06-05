@@ -1,0 +1,18 @@
+.fechando {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.div-flutuante {
+    position: fixed;
+    top: 75px; /* Ajuste a posição vertical conforme necessário */
+    right: 15px; /* Ajuste a posição horizontal conforme necessário */
+    z-index: 1000; /* Ordem de empilhamento, ajuste conforme necessário */
+}
+
+.div-flutuante-login {
+    position: fixed;
+    top: 20px; /* Ajuste a posição vertical conforme necessário */
+    right: 20px; /* Ajuste a posição horizontal conforme necessário */
+    z-index: 1000; /* Ordem de empilhamento, ajuste conforme necessário */
+}

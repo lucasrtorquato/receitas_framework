@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Categoria de Receita
+{% endblock %}
+
+{% block content %}
+
+<form id="form-categoria" method="POST">
+    <h2>Categoria de Receita</h2>
+    <hr>
+    <div class="btn-group" role="group" aria-label="Exemplo básico">
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.location.href='{{ url_for('categoria') }}'"><i class="fa-solid fa-xmark"></i>&nbsp;&nbsp;Cancelar</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('form-categoria').reset();"><i class="fa-solid fa-plus"></i>&nbsp;&nbsp;Nova Categoria</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.location.href='{{ url_for('listcategoria') }}'"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;Listar Categorias</button>
+    </div>
+    <p></p>
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="categoria-receita">Categoria</label>
+            <input type="text" class="form-control" id="categoria-receita"  name="categoria-receita"  value="{{ categoria.nome_categoria if categoria else '' }}" placeholder="Nome da Categoria">
+        </div>
+    </div>
+
+    <hr>
+    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-check"></i>&nbsp;Gravar Categoria</button>
+    <button type="button" class="btn btn-secondary" onclick="window.location.href='{{ url_for('categoria') }}'"><i class="fa-solid fa-xmark"></i>&nbsp;Cancelar</button>
+  </form>
+  <br>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Listar Usuários
+{% endblock %}
+
+{% block content %}
+<h2>Usuários Cadastrados</h2>
+<hr>
+
+<div class="btn-group mb-3" role="group">
+    <button type="button" class="btn btn-outline-secondary btn-sm" onclick="window.location.href='{{ url_for('usuario') }}'">
+        <i class="fa-solid fa-user-plus"></i>&nbsp;&nbsp;Novo Usuário
+    </button>
+</div>
+
+<table class="table table-bordered table-striped">
+    <thead class="thead-light">
+        <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Situação</th>
+            <th style="width: 160px;">Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.situacao }}</td>
+            <td>
+            <div class="btn-group btn-group-sm" role="group">
+                <a href="{{ url_for('editar_usuario', id=usuario.id) }}" class="btn btn-warning">
+                <i class="fa-solid fa-pen-to-square"></i> Editar
+                </a>
+                <a href="{{ url_for('excluir_usuario', id=usuario.id) }}" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">
+                <i class="fa-solid fa-trash"></i> Excluir
+                </a>
+            </div>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4" class="text-center">Nenhum usuário encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
