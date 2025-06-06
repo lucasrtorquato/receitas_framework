@@ -26,3 +26,6 @@ class ReceitaService:
         if not receita:
             raise ValueError("Receita não encontrada.")
         self.repository.remover_por_id(id)
+
+    def filtrar_receitas(self, nome=None, categoria=None):
+        return self.repository.filtrar_por_nome_e_categoria(nome, categoria)

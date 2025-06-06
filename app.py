@@ -398,20 +398,22 @@ def filtrarreceita():
 
     service_categoria = CategoriaService()
     categorias = service_categoria.listar_categorias()
+    receitas_filtradas = []
 
     if request.method == 'POST':
-
         nome = request.form.get('nome')
         categoria = request.form.get('categoria')
-        ingredientes = request.form.get('ingredientes')
-        modo_preparo = request.form.get('modo_preparo')
-
         # Validação básica
-        if not nome and not categoria and not ingredientes and not modo_preparo:
-            flash("Selecione pelo menos um filtro", "error")
-            return render_template("filtrarreceita.html", receitas=[], categorias=categorias)
-
-    return render_template("filtrarreceita.html", receitas=[], categorias=categorias)
+        if not nome and not categoria:
+            flash("Informe pelo menos um filtro", "error")
+        else:
+            service_receita = ReceitaService()
+            receitas_filtradas = service_receita.filtrar_receitas(nome, categoria)
+    #locals -> variaveis disponiveis no escopo atual
+    # print(len(receitas_filtradas))
+    # if len(receitas_filtradas) == 0:
+    #     flash("Nenhuma receita encontrada com os filtros informados.", "error")
+    return render_template("filtrarreceita.html", receitas=receitas_filtradas, categorias=categorias, nome_filtro=nome if 'nome' in locals() else '', categoria_filtro=categoria if 'categoria' in locals() else '')
 
 
 

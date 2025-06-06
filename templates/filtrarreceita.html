@@ -10,25 +10,18 @@ Filtrar Receitas
 
 <form method="POST" action="{{ url_for('filtrarreceita') }}" class="mb-4">
     <div class="row g-2">
-        <div class="col-md-3">
-            <input type="text" name="nome" class="form-control" placeholder="Nome da Receita"
-                   value="{{ request.args.get('nome', '') }}">
+        <div class="col-md-9">
+            <input type="text" name="nome" class="form-control" placeholder="Nome da Receita / Ingrediente / Modo de Preparo"
+                   value="{{ request.form.get('nome', '') }}">
+                   
         </div>
         <div class="col-md-3">
             <select name="categoria" class="form-control">
                 <option value="">Todas as Categorias</option>
                 {% for cat in categorias %}
-                    <option value="{{ cat.nome_categoria }}" {% if request.args.get('categoria') == cat.nome_categoria %}selected{% endif %}>{{ cat.nome_categoria }}</option>
+                    <option value="{{ cat.nome_categoria }}" {% if request.form.get('categoria') == cat.nome_categoria %}selected{% endif %}>{{ cat.nome_categoria }}</option>
                 {% endfor %}
             </select>
-        </div>
-        <div class="col-md-3">
-            <input type="text" name="ingredientes" class="form-control" placeholder="Ingredientes"
-                   value="{{ request.args.get('ingredientes', '') }}">
-        </div>
-        <div class="col-md-3">
-            <input type="text" name="modo_preparo" class="form-control" placeholder="Modo de Preparo"
-                   value="{{ request.args.get('modo_preparo', '') }}">
         </div>
         <div class="col-12 mt-2">
             <button type="submit" class="btn btn-primary btn-sm">
@@ -46,6 +39,7 @@ Filtrar Receitas
             <th>Categoria</th>
             <th>Ingredientes</th>
             <th>Modo de Preparo</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -53,12 +47,13 @@ Filtrar Receitas
         <tr>
             <td>{{ receita.nome_receita }}</td>
             <td>{{ receita.categoria }}</td>
-            <td>{{ receita.ingredientes }}</td>
-            <td>{{ receita.modo_preparo }}</td>
+            <td>{{ receita.ingredientes[:30] }}{% if receita.ingredientes|length > 30 %}...{% endif %}</td>
+            <td>{{ receita.modo_preparo[:30] }}{% if receita.modo_preparo|length > 30 %}...{% endif %}</td>
+            <td><a href="{{ url_for('editar_receita', id=receita.id) }}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i> Ver Receita</a></td>
         </tr>
         {% else %}
         <tr>
-            <td colspan="4" class="text-center">Nenhuma receita encontrada com os filtros informados.</td>
+            <td colspan="5" class="text-center">Nenhuma receita encontrada com os filtros informados.</td>
         </tr>
         {% endfor %}
     </tbody>
