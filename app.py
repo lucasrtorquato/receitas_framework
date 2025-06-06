@@ -392,6 +392,28 @@ def excluir_categoria(nome_categoria):
         flash("Categoria não encontrada.", "error")
     return redirect(url_for('listcategoria'))
 
+@app.route("/filtrarreceita", methods=['GET', 'POST'])
+@login_requerido
+def filtrarreceita():
+
+    service_categoria = CategoriaService()
+    categorias = service_categoria.listar_categorias()
+
+    if request.method == 'POST':
+
+        nome = request.form.get('nome')
+        categoria = request.form.get('categoria')
+        ingredientes = request.form.get('ingredientes')
+        modo_preparo = request.form.get('modo_preparo')
+
+        # Validação básica
+        if not nome and not categoria and not ingredientes and not modo_preparo:
+            flash("Selecione pelo menos um filtro", "error")
+            return render_template("filtrarreceita.html", receitas=[], categorias=categorias)
+
+    return render_template("filtrarreceita.html", receitas=[], categorias=categorias)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
