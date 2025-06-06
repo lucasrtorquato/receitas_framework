@@ -415,7 +415,20 @@ def filtrarreceita():
     #     flash("Nenhuma receita encontrada com os filtros informados.", "error")
     return render_template("filtrarreceita.html", receitas=receitas_filtradas, categorias=categorias, nome_filtro=nome if 'nome' in locals() else '', categoria_filtro=categoria if 'categoria' in locals() else '')
 
-
+@app.context_processor
+@login_requerido
+def inject_social_links():
+    contato_service = ContatoService()
+    contato = contato_service.obter_contato()
+    return {
+        "social_links": {
+            "facebook": contato.facebook,
+            "twitter": contato.rede_x,
+            "instagram": contato.instagram,
+            "linkedin": contato.linkedin,
+            "github": contato.github
+        }
+    }
 
 if __name__ == "__main__":
     app.run(debug=True)
