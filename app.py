@@ -416,19 +416,31 @@ def filtrarreceita():
     return render_template("filtrarreceita.html", receitas=receitas_filtradas, categorias=categorias, nome_filtro=nome if 'nome' in locals() else '', categoria_filtro=categoria if 'categoria' in locals() else '')
 
 @app.context_processor
-@login_requerido
 def inject_social_links():
-    contato_service = ContatoService()
-    contato = contato_service.obter_contato()
-    return {
-        "social_links": {
-            "facebook": contato.facebook,
-            "twitter": contato.rede_x,
-            "instagram": contato.instagram,
-            "linkedin": contato.linkedin,
-            "github": contato.github
-        }
+    from flask import session
+
+    social_links = {
+        "facebook": "",
+        "twitter": "",
+        "instagram": "",
+        "linkedin": "",
+        "github": ""
     }
+
+    if 'usuario_id' in session:
+        contato_service = ContatoService()
+        contato = contato_service.obter_contato()
+        if contato:
+            social_links = {
+                "facebook": contato.facebook or "",
+                "twitter": contato.rede_x or "",
+                "instagram": contato.instagram or "",
+                "linkedin": contato.linkedin or "",
+                "github": contato.github or ""
+            }
+
+    return {"social_links": social_links}
+
 
 if __name__ == "__main__":
     app.run(debug=True)

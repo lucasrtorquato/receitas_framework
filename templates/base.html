@@ -175,26 +175,32 @@
     <div class="container pt-4">
       <!-- Section: Social media -->
       <section class="mb-4">
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.facebook }}" role="button">
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.get('facebook', '') }}"
+          role="button">
           <i class="fab fa-facebook-f"></i>
         </a>
 
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.twitter }}" role="button">
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.twitter | default('') }}"
+          role="button">
           <i class="fa-brands fa-x-twitter"></i>
         </a>
 
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.instagram }}" role="button">
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.instagram | default('') }}"
+          role="button">
           <i class="fab fa-instagram"></i>
         </a>
 
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.linkedin }}" role="button">
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.linkedin | default('') }}"
+          role="button">
           <i class="fab fa-linkedin"></i>
         </a>
 
-        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.github }}" role="button">
+        <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="{{ social_links.github | default('')  }}"
+          role="button">
           <i class="fab fa-github"></i>
         </a>
-        <!-- Section: Social media -->
+      </section>
+      <!-- Section: Social media -->
     </div>
     <!-- Grid container -->
 
