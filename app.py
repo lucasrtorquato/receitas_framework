@@ -443,3 +443,6 @@ def inject_social_links():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+#git update-index --no-assume-unchanged dbReceitas.db
+#voltar o arquivo dbReceitas.db para o git
