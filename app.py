@@ -417,7 +417,6 @@ def filtrarreceita():
 
 @app.context_processor
 def inject_social_links():
-    from flask import session
 
     social_links = {
         "facebook": "",
@@ -427,7 +426,7 @@ def inject_social_links():
         "github": ""
     }
 
-    if 'usuario_id' in session:
+    if 'usuario' in session:
         contato_service = ContatoService()
         contato = contato_service.obter_contato()
         if contato:
